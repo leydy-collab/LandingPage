@@ -330,9 +330,11 @@ html {
 }
 
 .list-skills li{
+    position: relative;
     border-radius: var(--border-radius);
     /* background-color: var(--bg-alt); */
     padding: 3px;
+    color:var(--accent);
     border: 1px solid var(--accent);
     width: 250px;
     height: 70px;
@@ -340,17 +342,37 @@ html {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    cursor: pointer;
     animation: typing 4s steps(20) infinite, blink .6s infinite;
 }
-.list-skills li:hover{
-    cursor:pointer;
-    color:var(--accent);
-    background-color: var(--bg-card);
+
+.list-skills span{
+    z-index: 1;
 }
 
-.list-skills li::before{
-    width: 100%;
+.list-skills:hover{
+    span{
+    color:white;}
 }
+
+.list-skills li::after{
+    content:'';
+    position: absolute;
+    left:0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    transform-origin: right;
+    transform: scaleX(0);
+    background: #a470ff77;
+    transition: transform .5s;
+}
+.list-skills li:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
 .callout {
     margin-top: 24px;
     padding: 20px;
@@ -386,7 +408,7 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: var(--transition);
     cursor:pointer;
-    width: 260px;
+    max-width: 260px;
     height: 140px;
     display: flex;
     align-items: center;
@@ -424,6 +446,7 @@ html {
     margin-top: 40px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    padding-top: 5px;
 }
 
 .projects-carrusel::-webkit-scrollbar{
@@ -441,14 +464,22 @@ html {
 }
 
 .project-card {
+    position: relative;
     margin-bottom: 10px;
     background-color: var(--bg-card);
     border-radius: var(--border-radius);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    min-width: 550px;
+    max-width: 550px;
+    min-width: 400px;
     scroll-snap-align: start;
     transition: var(--transition);
+}
+
+.project-card:hover{
+    border-color:var(--accent);
+    box-shadow: 0 1px 25px rgba(95, 72, 228, 0.2);
+    transform: translateY(-5px);
 }
 
 .project-image {
@@ -469,10 +500,6 @@ html {
     width: 100%;
     height: 100%;
     object-position: center;
-}
-
-.img-web{
-    object-fit: contain;
 }
 
 .project-content {
